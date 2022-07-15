@@ -18,6 +18,7 @@ public class App {
             String cmd = sc.nextLine().trim();
             Rq rq = new Rq(cmd);
 
+            //switch문 불편한 점: 여러 개의 초기화된 같은 의미 지역변수 생성 필요 ex.paramId, paramId_
             switch (rq.getPath()) {
                 case "등록":
                     System.out.printf("명언 : ");
@@ -57,6 +58,33 @@ public class App {
                     wiseSayings.remove(foundWiseSaying);
                     System.out.printf("%d번 명언이 삭제되었습니다.\n", paramId);
             break;
+                case "수정":
+                    int paramId_ = rq.getIntParam("id", 0);
+
+                    if (paramId_ == 0) {
+                        System.out.println("id의 파라미터가 존재하지 않습니다");
+                        continue;
+                    }
+                    WiseSaying foundWiseSaying_ = findById(paramId_);
+                    if (foundWiseSaying_ == null) {
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n", paramId_);
+                        continue;
+
+                    }
+
+                    System.out.printf("명언(기존) : " + foundWiseSaying_.content);
+                    System.out.printf("명언 : ");
+                    String content_ = sc.nextLine().trim();
+                    System.out.printf("작가(기존) : " + foundWiseSaying_.author);
+                    System.out.printf("작가 : ");
+                    String author_ = sc.nextLine().trim();
+
+                    foundWiseSaying_.content = content_;
+                    foundWiseSaying_.author = author_;
+                    System.out.printf("%d번 명언이 수정되었습니다.\n", paramId_);
+
+
+                    break;
             case "종료":
                 break outer;
         }
