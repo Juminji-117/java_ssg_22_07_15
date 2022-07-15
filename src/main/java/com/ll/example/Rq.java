@@ -9,8 +9,8 @@ public class Rq {
     Map<String, String> queryParams;
     public Rq(String url) {
         this.url = url;
-        String[] urlBits = url.split("\\?", 2);
-        this.path = urlBits[0];
+        String[] urlBits = url.split("\\?", 2); // cmd(ex.수정)와 parameter(ex.id=1) 분리
+        this.path = urlBits[0]; // cmd == this.path == urlBits[0]
 
         queryParams = new HashMap<>();
 
@@ -44,10 +44,10 @@ public class Rq {
         String paramValue = queryParams.get(paramName);
 
 
-        if (paramValue.length() == 0) {
+        if (paramValue.length() == 0) { // 존재하지 않을 경우
             return defaultValue;
         }
-        return Integer.parseInt(paramValue);
+        return Integer.parseInt(paramValue); // int 타입으로 변환하여 리턴
     }
     public String getPath() {
         return path;

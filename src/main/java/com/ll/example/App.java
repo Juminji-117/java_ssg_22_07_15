@@ -16,8 +16,9 @@ public class App {
         while (true) {
             System.out.printf("명령) ");
             String cmd = sc.nextLine().trim();
+            Rq rq = new Rq(cmd);
 
-            switch (cmd) {
+            switch (rq.getPath()) {
                 case "등록":
                     System.out.printf("명언 : ");
                     String content = sc.nextLine().trim();
@@ -25,12 +26,10 @@ public class App {
                     String author = sc.nextLine().trim();
 
                     int id = ++lastId;
-
-                    System.out.printf("%d번 명언이 등록되었습니다.\n",id);
-
-
                     WiseSaying wiseSaying = new WiseSaying(id,content,author);
                     wiseSayings.add(wiseSaying);
+
+                    System.out.printf("%d번 명언이 등록되었습니다.\n",id);
                     break;
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
@@ -40,15 +39,13 @@ public class App {
                     }
                     break;
                 case "삭제":
-                    System.out.println("id를 입력해주세요.");
-                    id = sc.nextInt();
-                    if (wiseSayings.get(id) == null) {
-                        System.out.printf("%d번 명언은 존재하지 않습니다.\n",id);
+                    int paramId = rq.getIntParam("id", 0);
+                    if (wiseSayings.get(paramId) == null) { // Exception
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n",paramId);
                         continue;
                     }
-
-                    wiseSayings.remove(id);
-                    System.out.printf("%d번 명언이 삭제되었습니다.\n",id);
+                    wiseSayings.remove(paramId);
+                    System.out.printf("%d번 명언이 삭제되었습니다.\n",paramId);
                     break;
                 case "종료":
                     break outer;
