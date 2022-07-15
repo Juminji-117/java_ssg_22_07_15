@@ -7,6 +7,7 @@ public class App {
     public void run() {
         System.out.println("== 명언 SSG ==");
         Scanner sc = new Scanner(System.in);
+        int lastId = 0;
 
         outer:
         while (true) {
@@ -19,7 +20,7 @@ public class App {
                     String content = sc.nextLine().trim();
                     System.out.printf("작가 : ");
                     String author = sc.nextLine().trim();
-                    System.out.printf("1번 명언이 등록되었습니다.\n");
+                    System.out.printf("%d번 명언이 등록되었습니다.\n",++(lastId));
                     break;
                 case "종료":
                     break outer;
