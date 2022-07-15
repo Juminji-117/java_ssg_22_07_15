@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class WiseSayingController {
 
-    private WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
+    private WiseSayingService wiseSayingService = new WiseSayingService();
      Scanner sc = new Scanner(System.in);
 
      void write() {
@@ -15,17 +15,17 @@ public class WiseSayingController {
         System.out.printf("작가 : ");
         String author = sc.nextLine().trim();
 
-        int id = ++(wiseSayingRepository.lastId);
+        int id = ++(wiseSayingService.lastId);
          WiseSaying wiseSaying = new WiseSaying(id, content, author); // 객체 wiseSaying
-         wiseSayingRepository.wiseSayings.add(wiseSaying);
+         wiseSayingService.wiseSayings.add(wiseSaying);
 
          System.out.printf("%d번 명언이 등록되었습니다.\n", id);
     }
       void list() {
         System.out.println("번호 / 명언 / 작가");
         System.out.println("----------------------");
-        for (int i = 0; i < wiseSayingRepository.wiseSayings.size(); i++) {
-            WiseSaying wiseSaying_ = wiseSayingRepository.wiseSayings.get(i);
+        for (int i = 0; i < wiseSayingService.wiseSayings.size(); i++) {
+            WiseSaying wiseSaying_ = wiseSayingService.wiseSayings.get(i);
             System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.author);
         }
     }
@@ -37,14 +37,14 @@ public class WiseSayingController {
             return;
         }
 
-        WiseSaying foundWiseSaying = wiseSayingRepository.findById(paramId);
+        WiseSaying foundWiseSaying = wiseSayingService.findById(paramId);
         if (foundWiseSaying == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", paramId);
             return;
 
         }
 
-          wiseSayingRepository.wiseSayings.remove(foundWiseSaying);
+          wiseSayingService.wiseSayings.remove(foundWiseSaying);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", paramId);
     }
 
@@ -55,7 +55,7 @@ public class WiseSayingController {
             System.out.println("id의 파라미터가 존재하지 않습니다");
             return;
         }
-        WiseSaying foundWiseSaying_ = wiseSayingRepository.findById(paramId_);
+        WiseSaying foundWiseSaying_ = wiseSayingService.findById(paramId_);
         if (foundWiseSaying_ == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", paramId_);
             return;
