@@ -23,9 +23,11 @@ public class App {
                     String content = sc.nextLine().trim();
                     System.out.printf("작가 : ");
                     String author = sc.nextLine().trim();
-                    System.out.printf("%d번 명언이 등록되었습니다.\n",++(lastId));
 
-                    int id = lastId;
+                    int id = ++lastId;
+
+                    System.out.printf("%d번 명언이 등록되었습니다.\n",id);
+
 
                     WiseSaying wiseSaying = new WiseSaying(id,content,author);
                     wiseSayings.add(wiseSaying);
@@ -36,6 +38,17 @@ public class App {
                     for (WiseSaying temp : wiseSayings) {
                         System.out.printf("%d / %s / %s\n", temp.id, temp.content, temp.author);
                     }
+                    break;
+                case "삭제":
+                    System.out.println("id를 입력해주세요.");
+                    id = sc.nextInt();
+                    if (wiseSayings.get(id) == null) {
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n",id);
+                        continue;
+                    }
+
+                    wiseSayings.remove(id);
+                    System.out.printf("%d번 명언이 삭제되었습니다.\n",id);
                     break;
                 case "종료":
                     break outer;
