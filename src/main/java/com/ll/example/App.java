@@ -4,11 +4,11 @@ package com.ll.example;
 import java.util.Scanner;
 
 public class App {
+    private WiseSayingController wiseSayingController = new WiseSayingController();
 
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        WiseSayingController wiseSayingRepository = new WiseSayingController();
 
         System.out.println("== 명언 SSG ==");
 
@@ -21,16 +21,16 @@ public class App {
             //switch문 불편한 점: 여러 개의 초기화된 같은 의미 지역변수 생성 필요 ex.paramId, paramId_
             switch (rq.getPath()) {
                 case "등록":
-                    WiseSayingController.write();
+                    wiseSayingController.write();
                     break;
                 case "목록":
-                    WiseSayingController.list();
+                    wiseSayingController.list();
                     break;
                 case "삭제":
-                    WiseSayingController.remove(rq);
+                    wiseSayingController.remove(rq);
             break;
                 case "수정":
-                    WiseSayingController.modify(rq);
+                    wiseSayingController.modify(rq);
                     break;
             case "종료":
                 break outer;
