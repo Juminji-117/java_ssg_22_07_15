@@ -34,8 +34,9 @@ public class App {
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("----------------------");
-                    for (WiseSaying temp : wiseSayings) {
-                        System.out.printf("%d / %s / %s\n", temp.id, temp.content, temp.author);
+                    for (int i = 0; i < wiseSayings.size(); i++) {
+                        WiseSaying tempWiseSaying = wiseSayings.get(i);
+                        System.out.printf("%d / %s / %s\n", tempWiseSaying.id, tempWiseSaying.content, tempWiseSaying.author);
                     }
                     break;
                 case "삭제":
