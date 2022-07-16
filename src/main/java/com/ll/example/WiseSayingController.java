@@ -1,5 +1,5 @@
 /*
-write or list 기능 오류 해결: i번째 아이디 등록시 처음~(i-1)번째 content가 i번째 content 값으로 바뀜
+create or list 기능 오류 해결: i번째 아이디 등록시 처음~(i-1)번째 content가 i번째 content 값으로 바뀜
 ->원인:WiseSaying 클래스에서 content가 static 처리되어 있었음
  */
 package com.ll.example;
